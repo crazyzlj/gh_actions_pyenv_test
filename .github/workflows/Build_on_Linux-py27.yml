@@ -13,7 +13,7 @@ jobs:
       - name: Checkout this repository
         uses: actions/checkout@v3
 
-      - uses: ./
+      - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: py27seims
           environment-file: envs/py27seims_env.yml
