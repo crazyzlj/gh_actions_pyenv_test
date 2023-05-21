@@ -1,4 +1,4 @@
-name: Test PySEIMS environments on Ubuntu
+name: Test PySEIMS environments on macOS
 
 on:
     push:
@@ -6,8 +6,8 @@ on:
     workflow_dispatch:
 
 jobs:
-  build-linux-ubuntu:
-    runs-on: ubuntu-latest
+  build-mac:
+    runs-on: macos-latest
 
     steps:
       - name: Checkout this repository

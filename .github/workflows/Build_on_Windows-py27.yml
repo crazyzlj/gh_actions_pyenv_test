@@ -1,4 +1,4 @@
-name: Test PySEIMS environments on Ubuntu
+name: Test PySEIMS environments on Windows
 
 on:
     push:
@@ -6,8 +6,8 @@ on:
     workflow_dispatch:
 
 jobs:
-  build-linux-ubuntu:
-    runs-on: ubuntu-latest
+  build-windows:
+    runs-on: windows-2019
 
     steps:
       - name: Checkout this repository
@@ -30,12 +30,12 @@ jobs:
           auto-update-conda: true
           use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
 
-      - name: Bash
-        shell: bash -el {0}
+      - name: PowerShell Core
+        shell: pwsh
         run: |
-          #conda info
-          #conda list
-          #printenv | sort
+          conda info
+          conda list
+          dir env: | %{"{0}={1}" -f $_.Name,$_.Value}
           cd src
           python pyseims_check.py
           
