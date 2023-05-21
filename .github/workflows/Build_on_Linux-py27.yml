@@ -1,0 +1,34 @@
+name: Test PySEIMS environments on Ubuntu
+
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+  build-linux-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v3
+
+      - uses: ./
+        with:
+          activate-environment: py27seims
+          environment-file: envs/py27seims_env.yml
+          python-version: 2.7
+          auto-activate-base: false
+          auto-update-conda: true
+
+      - name: Bash
+        shell: bash -el {0}
+        run: |
+          conda info
+          conda list
+          printenv | sort
+          ls
+          cd src
+          ls
+          python pyseims_check.py
+          
