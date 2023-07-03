@@ -3,10 +3,10 @@ name: Test PySEIMS environments on Windows
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      -master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -41,5 +41,17 @@ jobs:
           conda list
           dir env: | %{"{0}={1}" -f $_.Name,$_.Value}
           cd src
+          python pyseims_check.py
+
+      - name: PowerShell Core
+        shell: cmd /C CALL {0}
+        run: |
+          cd src
+          python pyseims_check.py
+
+      - name: cmd
+        shell: cmd /C CALL {0}
+        run: >-
+          cd src &&
           python pyseims_check.py
           
